@@ -55,7 +55,7 @@ const loginController = async(req,resp)=>{
             success:true,
             msg:"User Successfully login",
             userdata,
-            status:400
+            status:200
         })}catch(err){
             console.log(err.message)
             return resp.json({
@@ -84,7 +84,7 @@ const registerController = async(req,resp)=>{
             const user = await User.findOne({email})
             if(user){
                 return resp.json({
-                    status:402,
+                    status:406,
                     success:false,
                     msg:"User already exists"
                 })
@@ -112,7 +112,7 @@ const registerController = async(req,resp)=>{
 
             console.log(newUser);
             return resp.json({
-                status:400,
+                status:200,
                 success:true,
                 msg:"User created successfully",
                 data:newUser
@@ -133,7 +133,7 @@ const registerController = async(req,resp)=>{
 const logoutController = async(req,resp)=>{
     try{
         resp.clearCookie("web_token").json({
-            status:400,
+            status:200,
             success:true,
             msg:"User logout Successfully"
         })
