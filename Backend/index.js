@@ -4,10 +4,17 @@ require('dotenv').config();
 const PORT = process.env.PORT || 8000
 const connectDB = require('./config/database')
 const cors = require('cors')
-const cookieparser = require('cookie-parser')
-app.use(cors())
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    credentials: true,
+    exposedHeaders: ['Authorization'], // Expose custom headers
+  };
+  
+  app.use(cors(corsOptions));
 app.use(express.json())
-app.use(cookieparser())
+
 
 const authRouter = require('./routes/auth.Route')
 const listRouter = require('./routes/list.Route')

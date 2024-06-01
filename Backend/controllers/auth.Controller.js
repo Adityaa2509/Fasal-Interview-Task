@@ -55,6 +55,7 @@ const loginController = async(req,resp)=>{
             success:true,
             msg:"User Successfully login",
             userdata,
+            token,
             status:200
         })}catch(err){
             console.log(err.message)

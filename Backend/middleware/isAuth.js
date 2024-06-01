@@ -1,13 +1,14 @@
 const jwt = require('jsonwebtoken');
 
 const isAuth = async (req, resp, next) => {
+  
   try{
  const token = req.cookies.web_token;
- console.log(token)
+ console.log(token+"hai hi nahi bhai ji")
  if (!token) {
   
     return resp.json({
-        status:401,
+        status:400,
         msg:"Unauthorized Access"
     });
   }
@@ -15,7 +16,7 @@ const isAuth = async (req, resp, next) => {
   jwt.verify(token, process.env.TOKEN_SECRET, (err, payload) => {
     if (err) {
        return resp.json({
-        status:402,
+        status:401,
         msg:"Unauthorized Access"
     });
     }

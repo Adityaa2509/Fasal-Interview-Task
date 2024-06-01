@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-//JSON.parse(localStorage.getItem('User')) ||
-const initialState =  {
+//
+const initialState =  JSON.parse(localStorage.getItem('User')) ||{
   user: null,
   error: null,
   loading: false
@@ -13,45 +13,45 @@ const userSlice = createSlice({
     signinstart(state) {
       state.error = null;
       state.loading = true;
-  //    localStorage.setItem('User', JSON.stringify(state));
+     localStorage.setItem('User', JSON.stringify(state));
     },
     signinsuccess(state, action) {
         console.log(action.payload)
       state.error = null;
       state.loading = false;
       state.user = action.payload;
-    //  localStorage.setItem('User', JSON.stringify(state));
+     localStorage.setItem('User', JSON.stringify(state));
     },
     signinfailure(state, action) {
       state.error = action.payload;
       state.loading = false;
-      //localStorage.setItem('User', JSON.stringify(state));
+      localStorage.setItem('User', JSON.stringify(state));
     },
     signupstart(state) {
       state.error = null;
       state.loading = true;
-      //localStorage.setItem('User', JSON.stringify(state));
+      localStorage.setItem('User', JSON.stringify(state));
     },
     signupsuccess(state) {
       state.error = null;
       state.loading = false;
-      //localStorage.setItem('User', JSON.stringify(state));
+      localStorage.setItem('User', JSON.stringify(state));
     },
     signupfailure(state, action) {
       state.error = action.payload;
       state.loading = false;
-      //localStorage.setItem('User', JSON.stringify(state));
+      localStorage.setItem('User', JSON.stringify(state));
     },
     logoutfailure(state, action) {
       state.error = action.payload;
       state.loading = false;
-      //localStorage.setItem('User', JSON.stringify(state));
+      localStorage.setItem('User', JSON.stringify(state));
     },
     logoutsuccess(state) {
       state.error = null;
       state.loading = false;
       state.user = null;
-      //localStorage.setItem('User', JSON.stringify(state));
+      localStorage.setItem('User', JSON.stringify(state));
 
     }
   }

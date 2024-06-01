@@ -1,14 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Navbar() {
   return (
     <div className="navbar bg-base-200 justify-between">
       <div className="flex items-center">
-        <a className="btn btn-ghost text-2xl font-extrabold">FasalMovieLibrary</a>
+        <a className="btn btn-ghost text-2xl font-extrabold" href='/'>FasalMovieLibrary</a>
       </div>
       <div className="flex-1 flex justify-center ">
         <ul className="menu menu-horizontal px-1 text-[18px]">
-          <li><a>Item 1</a></li>
+          <Link to={'/create'}>Item 1</Link>
           <li><a>Item 3</a></li>
         </ul>
       </div>

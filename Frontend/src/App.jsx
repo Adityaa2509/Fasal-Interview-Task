@@ -4,6 +4,11 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Navbar from './components/Navbar'
+import MovieDetail from './pages/MovieDetail'
+import MyList from './pages/MyList'
+import CreateList from './pages/CreateList'
+import AddtoList from './pages/AddtoList'
+
 function App() {
   return (
     <>
@@ -13,7 +18,10 @@ function App() {
         <Route element={<Home/>} path='/'/>
         <Route element={<Login/>} path='/login'/>
         <Route element={<Register/>} path='/register'/>
-        
+        <Route element={<MovieDetail/>} path='/movie/:imdbId'/>
+        <Route element={<MyList/>} path='/list/:listId' />
+        <Route element={<CreateList/>} path='/create'/>
+        <Route element={<AddtoList/>} path='/addto/:listId'/>
       </Routes>
       </BrowserRouter>
     </>

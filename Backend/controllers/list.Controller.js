@@ -70,12 +70,14 @@ const createList = async(req,resp)=>{
                             owner:user.id
                       })    
                       
-        return resp.json({
+                      console.log(nlist)
+                      return resp.json({
             status:200,
             msg:"List Created Successfully",
             success:true,
             list:nlist
-        })              
+        })    
+                  
 
     }catch(err){
         console.log(err.message);

@@ -17,7 +17,7 @@ function Login() {
         try{
             e.preventDefault();
             dispatch(signinstart());
-            const resp = await axios.post('http://localhost:8080/api/v1/auth/login',formData)
+            const resp = await axios.post('http://localhost:8080/api/v1/auth/login',formData,{ withCredentials: true })
             console.log(resp)
             if(resp.data.status == 402){
               dispatch(signinfailure(resp.data.msg));
