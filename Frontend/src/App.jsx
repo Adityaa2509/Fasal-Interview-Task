@@ -16,7 +16,8 @@ function App() {
       <BrowserRouter>
       <Navbar/>
       <Routes>
-        <Route element={<Home/>} path='/'/>
+        <Route element={<Login/>} path='/'/>
+        <Route element={<Home/>} path='/home'/>
         <Route element={<Login/>} path='/login'/>
         <Route element={<Register/>} path='/register'/>
         <Route element={<MovieDetail/>} path='/movie/:imdbId'/>

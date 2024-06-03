@@ -68,7 +68,7 @@ function MovieDetail() {
           </div>
           <div className="mt-6">
             <button 
-              onClick={() => navigate('/')} 
+              onClick={() => navigate('/home')} 
               className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
             >
               Go Back

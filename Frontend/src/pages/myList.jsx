@@ -35,7 +35,7 @@ function MyList() {
       // Navigate to home page upon successful deletion
       console.log(resp.data)
       if(resp.data.status == 200)
-      navigate('/');
+      navigate('/home');
     
     } catch (error) {
       console.error('Error deleting list:', error);
@@ -105,9 +105,7 @@ function MyList() {
         <div className='text-center text-xl font-medium mb-6 '>{listDetails.list.description}</div>
         <div>{listDetails.list.sharableLink&&<div>
           <div>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" >
-                Share Playlist
-            </button>
+            
             {   <div className="mt-2">
                     <p>Shareable Link: <a href={`http://localhost:5173/shared/${listDetails.list.sharableLink}`} target="_blank" rel="noopener noreferrer"  className="text-blue-500">url</a></p>
                 </div>

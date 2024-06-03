@@ -42,6 +42,7 @@ function AddtoList() {
   return (
     <div className="container mx-auto">
       <h2 className="text-2xl font-semibold mb-4">Add to List</h2>
+      <h2 className="text-xl font-semibold mb-4">Click ont the movie to Add</h2>
       <div className="flex justify-center items-center mt-4">
         <input
           type="text"

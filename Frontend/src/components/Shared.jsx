@@ -10,17 +10,20 @@ function Shared() {
   const [loading, setLoading] = useState(true);
   const [movieDetails, setMovieDetails] = useState(null);
   const [show,setShow] = useState(false)
+  const [error,seterror] = useState(false);
   const navigate = useNavigate()
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
         console.log(sharableLink)
         const response = await axios.get(`http://localhost:8080/api/v1/movie/shared/${sharableLink}`,{withCredentials:true});
+        
         console.log(response.data)
         console.log(response.data)
         if(response.data.status == 200)
         {setListDetails(response.data.listDetails)
           setMovieDetails(response.data.result);}
+          else 
           console.log(movieDetails)
         setLoading(false); // Set loading to false once data is fetched
       } catch (error) {

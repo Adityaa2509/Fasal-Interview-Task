@@ -1,6 +1,6 @@
 // Home.js
 import React, { useEffect, useState } from 'react';
-import Carousel from '../components/Carousel';
+
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 

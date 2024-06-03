@@ -32,7 +32,7 @@ function Login() {
               return ;
             }
             dispatch(signinsuccess(resp.data.userdata))
-            navigate('/')
+            navigate('/home')
         }catch(err){
             console.log(err);
             dispatch(signinfailure(err.message))
