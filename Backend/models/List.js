@@ -23,7 +23,7 @@ const listSchema = mongoose.Schema({
     },
     sharableLink:{
         type:String,
-        unique:false
+        unique:true
     }
 })
 

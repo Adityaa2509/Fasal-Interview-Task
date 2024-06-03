@@ -97,7 +97,7 @@ function Home() {
       >
         <div className="w-full h-40 flex  justify-center">
           <p className="text-4xl font-extrabold
-          font-semibold text-gray-800">{movie.name}</p>
+           text-gray-800">{movie.name}</p>
         </div>
         <div className="absolute inset-0 p-4 bg-black opacity-0 hover:opacity-50 transition-opacity flex items-center justify-center">
           <p className="text-white text-center">{movie.description}</p>

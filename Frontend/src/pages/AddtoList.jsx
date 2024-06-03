@@ -45,13 +45,14 @@ function AddtoList() {
       <div className="flex justify-center items-center mt-4">
         <input
           type="text"
-          className="border border-gray-300 p-2 rounded-l"
+          className="border border-gray-300 bg-base-200
+          p-2 rounded-lg rounded-r-none outline-none h-12 w-96"
           placeholder="Search for a movie..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <button
-          className="bg-blue-500 text-white p-2 rounded-r hover:bg-blue-600"
+           className="border bg-blue-500 w-20 text-white p-2 h-12 rounded-lg rounded-l-none hover:bg-blue-600"
           onClick={() => setSearchTerm('')}
         >
           Clear

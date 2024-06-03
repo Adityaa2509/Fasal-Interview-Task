@@ -1,4 +1,6 @@
-const axios = require('axios')
+const axios = require('axios');
+const List = require('../models/List');
+const User = require('../models/User');
 const searchByQuery = async(req,resp)=>{
     try{
     const {q} = req.query;
@@ -78,4 +80,48 @@ const searchById = async(req,resp)=>{
         }
 
 
-module.exports = {searchById,searchByQuery}
+    const sharableLink = async(req,resp)=>{
+        console.log(req.params)
+        try{
+            
+            const {sharableLink} = req.params;
+            console.log(sharableLink);
+            const list = await List.findOne({sharableLink:sharableLink});
+            console.log(list);
+            
+           const movies = list.movies;
+            console.log(movies)
+            const movieDetails = [];
+            for (const movie of movies) {
+                const resp = await axios(`http://www.omdbapi.com/?i=${movie}&apikey=fe15333a`);
+                console.log(resp.data);
+                movieDetails.push(resp.data)
+            }
+            const user = await User.findById(list.owner);
+            const listDetails = {
+                Owner:user.username,
+                listName:list.name,
+                listDescription:list.description
+            }
+        console.log(movieDetails)
+            return resp.json({
+                success:true,
+                status:200,
+                msg:"Complete List Fetched Successfully",
+                result : movieDetails,
+                listDetails
+            })
+            
+        }catch(err){
+            console.log(err);
+            resp.json({
+                status:500,
+                msg:"Internal Server Error",
+                error:err.message,
+                success:false
+            })
+        }
+    }
+
+
+module.exports = {searchById,searchByQuery,sharableLink}

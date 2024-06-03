@@ -1,5 +1,5 @@
 const List = require("../models/List");
-
+const uuid = require('uuid')
 //get all list of the user 
 const getAllLists = async(req,resp)=>{
     try{
@@ -31,7 +31,28 @@ const getAllLists = async(req,resp)=>{
     }
     
 }
+function generateUniqueIdentifier() {
+    return uuid.v4();
+}
 
+// Check if a generated unique identifier is indeed unique within the system
+async function isUniqueIdentifierUnique(uniqueIdentifier) {
+    const existingList = await List.findOne({ uniqueIdentifier });
+    return !existingList;
+}
+
+// Generate a unique identifier with retries to handle collisions
+async function generateUniqueIdentifierWithRetry(maxRetries = 3) {
+    let retries = 0;
+    while (retries < maxRetries) {
+        const uniqueIdentifier = generateUniqueIdentifier();
+        if (await isUniqueIdentifierUnique(uniqueIdentifier)) {
+            return uniqueIdentifier;
+        }
+        retries++;
+    }
+    throw new Error("Failed to generate a unique identifier after maximum retries.");
+}
 
 
 
@@ -62,12 +83,16 @@ const createList = async(req,resp)=>{
                 msg:"List already exists",
                 success:false,
             })
-        }
+        }if(isPublic){
+
+            const uniqueIdentifier = await generateUniqueIdentifierWithRetry();
+            console.log(uniqueIdentifier)
         const nlist = await List.create({
                             name,
                             description,
                             isPublic,
-                            owner:user.id
+                            owner:user.id,
+                            sharableLink:uniqueIdentifier
                       })    
                       
                       console.log(nlist)
@@ -76,7 +101,22 @@ const createList = async(req,resp)=>{
             msg:"List Created Successfully",
             success:true,
             list:nlist
-        })    
+        })}else{
+            const nlist = await List.create({
+                name,
+                description,
+                isPublic,
+                owner:user.id
+          })    
+          
+          console.log(nlist)
+          return resp.json({
+status:200,
+msg:"List Created Successfully",
+success:true,
+list:nlist
+})
+        }    
                   
 
     }catch(err){

@@ -1,23 +1,38 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutfailure, logoutsuccess } from '../features/User';
 function Navbar() {
+  const navigate = useNavigate()
+  const {user} = useSelector(state=>state.User)
+  console.log(user)
+  const dispatch = useDispatch();
+  const logoutHandler = async()=>{
+    
+    const resp = await axios.post('http://localhost:8080/api/v1/auth/logout',{withCredentials:true});
+    console.log(resp.data)
+    if(resp.data.status == 200)
+    { dispatch(logoutsuccess());
+       navigate('/login')
+return ;
+    }
+    dispatch(logoutfailure(resp.data.msg));
+  }
   return (
     <div className="navbar bg-base-200 justify-between">
       <div className="flex items-center">
         <a className="btn btn-ghost text-2xl font-extrabold" href='/'>FasalMovieLibrary</a>
       </div>
-      <div className="flex-1 flex justify-center ">
+     {user && <div className="flex-1 flex justify-center ">
         <ul className="menu menu-horizontal px-1 text-[18px]">
-          <Link to={'/create'}>Item 1</Link>
-          <li><a>Item 3</a></li>
+          <Link to={'/create'}>Create PlayList</Link>
+          
         </ul>
-      </div>
+      </div>}
       <div className="flex items-center gap-6">
-        <div className="form-control">
-          <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto rounded-xl" />
-        </div>
-        <div className="dropdown dropdown-end mr-9">
+       
+        {user && <div className="dropdown dropdown-end mr-9">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
               <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
@@ -30,10 +45,9 @@ function Navbar() {
                 <span className="badge">New</span>
               </a>
             </li>
-            <li><a>Settings</a></li>
-            <li><a>Logout</a></li>
+            <li onClick={logoutHandler}><a>Logout</a></li>
           </ul>
-        </div>
+        </div>}
       </div>
     </div>
   )

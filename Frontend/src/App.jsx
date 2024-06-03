@@ -8,6 +8,7 @@ import MovieDetail from './pages/MovieDetail'
 import MyList from './pages/MyList'
 import CreateList from './pages/CreateList'
 import AddtoList from './pages/AddtoList'
+import Shared from './components/Shared'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route element={<MyList/>} path='/list/:listId' />
         <Route element={<CreateList/>} path='/create'/>
         <Route element={<AddtoList/>} path='/addto/:listId'/>
+        <Route element={<Shared/>} path='/shared/:sharableLink'/>
       </Routes>
       </BrowserRouter>
     </>
